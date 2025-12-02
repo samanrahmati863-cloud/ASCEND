@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -6,11 +5,11 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-import AIChat from './components/AIChat';
-import VideoBackground from './components/VideoBackground';
+// import AIChat from './components/AIChat'; // <--- موقتا غیرفعال شد
+// import VideoBackground from './components/VideoBackground'; // <--- حذف ایمپورت اضافه
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -120,7 +119,6 @@ const App: React.FC = () => {
   };
 
   const openWhatsApp = (message: string) => {
-    // Replace with actual phone number
     const phoneNumber = "989913851865"; 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -129,14 +127,10 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      <AIChat />
+      {/* <AIChat />  <--- فعلا غیرفعال شده تا سایت بالا بیاید */} 
       
-      {/* Video Background Commented Out to fix potential crash on deployment */}
-      {/* <VideoBackground /> */}
-
       {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
-        {/* Logo Centered - Adjusted size and tracking */}
         <div 
           className="text-3xl font-heading font-black tracking-widest text-white z-50 cursor-pointer text-center" 
           onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
@@ -145,7 +139,6 @@ const App: React.FC = () => {
           ASCEND
         </div>
         
-        {/* Desktop Links - Absolute Positioning to keep logo centered */}
         <div className="absolute right-8 hidden md:flex gap-12 items-center">
           {['Work', 'Services', 'Contact'].map((item) => (
             <button 
@@ -160,7 +153,6 @@ const App: React.FC = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button - Absolute Right */}
         <button 
           className="absolute right-6 md:hidden z-50 text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -169,7 +161,6 @@ const App: React.FC = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -191,7 +182,6 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* HERO SECTION */}
       <header className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 overflow-hidden">
         <div className="z-10 text-center max-w-5xl">
           <motion.div
@@ -220,7 +210,6 @@ const App: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div 
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50"
           animate={{ y: [0, 10, 0] }}
@@ -231,7 +220,6 @@ const App: React.FC = () => {
         </motion.div>
       </header>
 
-      {/* WORK / GALLERY SECTION */}
       <section id="work" className="relative z-10 py-32 px-4 md:px-8">
         <div className="max-w-[1800px] mx-auto">
           <div className="flex justify-between items-end mb-20 border-b border-white/10 pb-8">
@@ -260,7 +248,6 @@ const App: React.FC = () => {
                   className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                 />
                 
-                {/* Liquid Glass Overlay on Hover */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-transparent to-white/5 backdrop-blur-[2px]" />
                 
                 <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22, 1, 0.36, 1]">
@@ -280,7 +267,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* SERVICES / PRICING SECTION */}
       <section id="services" className="relative z-10 py-32 bg-white/5 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
            <div className="text-center mb-24">
@@ -288,7 +274,6 @@ const App: React.FC = () => {
              <p className="text-gray-400 max-w-xl mx-auto uppercase tracking-widest text-sm">Elevate your brand aesthetic</p>
            </div>
 
-           {/* Cards Grid */}
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
              {PACKAGES.map((pkg, i) => (
                <motion.div
@@ -302,7 +287,6 @@ const App: React.FC = () => {
                    boxShadow: pkg.isPopular ? '0 0 50px rgba(255,255,255,0.05)' : 'none'
                  }}
                >
-                 {/* Glass Reflection */}
                  <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-y-12 translate-y-[-50%]" />
 
                  <div className="p-8 md:p-12 text-right" dir="rtl">
@@ -350,7 +334,6 @@ const App: React.FC = () => {
              ))}
            </div>
 
-           {/* Terms & Protocols Section */}
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/10 font-persian" dir="rtl">
              <div className="space-y-4 text-right">
                 <div className="flex items-center gap-3 text-white">
@@ -385,7 +368,6 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer id="contact" className="relative z-10 pt-32 pb-12 px-4 md:px-8 border-t border-white/10 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
           <div className="mb-12 md:mb-0">
