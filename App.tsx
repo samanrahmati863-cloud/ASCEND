@@ -10,6 +10,7 @@ import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint } from 'lucide-rea
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import AIChat from './components/AIChat';
+import VideoBackground from './components/VideoBackground';
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -99,6 +100,9 @@ const App: React.FC = () => {
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
       <AIChat />
+      
+      {/* Video Background Commented Out to fix potential crash on deployment */}
+      {/* <VideoBackground /> */}
 
       {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
