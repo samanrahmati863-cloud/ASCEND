@@ -207,7 +207,7 @@ const App: React.FC = () => {
           <LiquidText 
             text="ASCEND" 
             as="h1" 
-            className="text-[18vw] leading-[0.8] tracking-tighter opacity-100"
+            className="text-[18vw] md:text-[12rem] leading-[1] md:leading-[1.1] tracking-tighter opacity-100"
           />
           
           <motion.p
