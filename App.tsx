@@ -19,42 +19,42 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/my_project_1_cover.jpg',
     description: 'High-contrast portraiture for the digital age.'
   },
   { 
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/my_project_2_cover.jpg',
     description: 'Gothic futurism meets luxury streetwear.'
   },
   { 
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    image: 'https://images.unsplash.com/photo-1616091216791-a5360b5fc78a?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/my_project_3_cover.jpg',
     description: 'Generative fluid simulations for fabric rendering.'
   },
   { 
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    image: 'https://images.unsplash.com/photo-1500917293047-325b96908695?q=80&w=1000&auto=format&fit=crop',
+    image:  '/images/my_project_4_cover.jpg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.'
   },
   { 
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    image: 'https://images.unsplash.com/photo-1605763240004-7e93b172d754?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/my_project_5_cover.jpg',
     description: 'Perfectly imperfect digital humans.'
   },
   { 
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/my_project_6_cover.jpg',
     description: 'Refractive visuals for accessory launch.'
   },
 ];
