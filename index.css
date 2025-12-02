@@ -1,0 +1,32 @@
+/* Base CSS (add to index.css) */
+/* Small reset and utility classes used by App.tsx */
+
+:root {
+  --bg: #000;
+  --fg: #fff;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Font helpers (App.tsx expects these classnames) */
+.font-heading { font-family: 'Syncopate', sans-serif; }
+.font-persian { font-family: 'Vazirmatn', sans-serif; }
+
+/* small helpers to keep layout stable before JS hydrates */
+img { max-width: 100%; display: block; }
+button { cursor: pointer; }
+
+/* optional: reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
