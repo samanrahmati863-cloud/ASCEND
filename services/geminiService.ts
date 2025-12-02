@@ -4,49 +4,31 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
-
-const API_KEY = process.env.API_KEY || '';
-
-let chatSession: Chat | null = null;
-
-export const initializeChat = (): Chat => {
-  if (chatSession) return chatSession;
-
-  const ai = new GoogleGenAI({ apiKey: API_KEY });
-  
-  chatSession = ai.chats.create({
-    model: 'gemini-2.5-flash',
-    config: {
-      systemInstruction: `You are the Lead Consultant for ASCEND, a luxury AI visual agency based in Iran but operating globally.
-      
-      Agency Vibe: High-fashion, futuristic, cinematic, 'Chrome Hearts' aesthetic, liquid glass visuals.
-      Mission: Elevate local fashion brands to look global and untouchable through AI campaign visuals.
-      
-      Services:
-      1. Editorial (Visuals Only) - Social media content, mood boarding.
-      2. Campaign (Launch) - Full video/image suite for new collection drops.
-      3. Brand Identity (Full Suite) - Total visual overhaul, storytelling, viral strategy.
-      
-      Tone: Professional yet edgy, concise, high-fashion. Use minimal emojis (💎, 🌑, 🔗).
-      Goal: Convince fashion brands they need AI visuals to go viral.`,
-    },
-  });
-
-  return chatSession;
-};
+// Mock service to replace Gemini API
+// This allows the site to function statically on GitHub Pages without an API Key.
 
 export const sendMessageToGemini = async (message: string): Promise<string> => {
-  if (!API_KEY) {
-    return "Connection to ASCEND Mainframe failed. (Missing API Key)";
+  // Simulate network delay
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
+  const lowerMsg = message.toLowerCase();
+
+  // Simple rule-based responses for the static demo
+  if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+    return "Greetings. Welcome to ASCEND. How can we elevate your brand aesthetic today?";
   }
 
-  try {
-    const chat = initializeChat();
-    const response: GenerateContentResponse = await chat.sendMessage({ message });
-    return response.text || "No signal.";
-  } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Network unreachable. Please try again.";
+  if (lowerMsg.includes('price') || lowerMsg.includes('cost') || lowerMsg.includes('package')) {
+    return "We offer three tiers: Basic (19.8M IRT), Standard (48M IRT), and Advanced (95M IRT). Please scroll to the Services section for full details.";
   }
+
+  if (lowerMsg.includes('work') || lowerMsg.includes('portfolio') || lowerMsg.includes('example')) {
+    return "Our Work section showcases our latest AI-driven campaigns, featuring void aesthetics and liquid silk simulations.";
+  }
+
+  if (lowerMsg.includes('contact') || lowerMsg.includes('book') || lowerMsg.includes('reserve')) {
+    return "You can reserve a package directly via the buttons in the Services section, or email us at hello@ascend.agency.";
+  }
+
+  return "I am currently operating in static demo mode. For detailed strategy and booking, please use the WhatsApp links in our Services section.";
 };
