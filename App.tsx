@@ -7,7 +7,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint } from 'lucide-react';
-import VideoBackground from './components/VideoBackground';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import AIChat from './components/AIChat';
@@ -97,9 +96,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
+    <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      <VideoBackground />
       <AIChat />
 
       {/* Navigation - Glassy Bar */}
@@ -175,7 +173,7 @@ const App: React.FC = () => {
           <LiquidText 
             text="ASCEND" 
             as="h1" 
-            className="text-[18vw] leading-[0.8] tracking-tighter mix-blend-overlay opacity-90"
+            className="text-[18vw] leading-[0.8] tracking-tighter opacity-100"
           />
           
           <motion.p
