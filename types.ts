@@ -18,6 +18,8 @@ export interface ServicePackage {
   description: string;
   features: string[];
   isPopular?: boolean;
+  bonus?: string;
+  whatsappMessage?: string;
 }
 
 export interface ChatMessage {

@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 import AIChat from './components/AIChat';
@@ -61,23 +61,46 @@ const PORTFOLIO: Project[] = [
 
 const PACKAGES: ServicePackage[] = [
   {
-    title: 'Editorial',
-    price: '$2,500',
-    description: 'Static visual excellence for social dominance.',
-    features: ['10 AI-Generated Images', 'Mood & Style Curation', 'High-Res Deliverables', 'Social Media Formatting']
+    title: 'پکیج پایه',
+    price: '۱۹,۸۰۰,۰۰۰ تومان',
+    description: 'شروع قدرتمند برای حضور در شبکه‌های اجتماعی.',
+    features: [
+      '۱ ردیف کامل پست‌های گرید (۳ پست شبکه‌ای)',
+      '۲ تصویر هیرو با کیفیت بالا',
+      '۱ ویدیو موشن (ریل)',
+      '۱ دور بازبینی'
+    ],
+    bonus: 'شامل ایجاد "سفیر برند" (مدل شخصی‌سازی‌شده)',
+    whatsappMessage: 'سلام، آماده‌ام پکیج پایه رو رزرو کنم.'
   },
   {
-    title: 'Campaign',
-    price: '$5,000',
-    description: 'Full motion and still suite for collection drops.',
+    title: 'پکیج استاندارد',
+    price: '۴۸,۰۰۰,۰۰۰ تومان',
+    description: 'کمپین کامل برای تاثیرگذاری حداکثری.',
     isPopular: true,
-    features: ['20+ Campaign Assets', '3 Short-Form Motion Videos', 'Art Direction', 'Copywriting Assistance', 'Lookbook Layout']
+    features: [
+      '۲ ردیف کامل پست‌های گرید (۶ پست شبکه‌ای)',
+      '۴ تصویر ادیتوریال (سبک مجله‌ای)',
+      '۲ ریل سینمایی (داستانی)',
+      'کپشن‌های Narrative (فارسی و انگلیسی)',
+      '۲ دور بازبینی'
+    ],
+    bonus: 'شامل «تریپتیک هیجان» (۳ تصویر استوری پیوسته)',
+    whatsappMessage: 'سلام، می‌خوام پکیج استاندارد رو رزرو کنم.'
   },
   {
-    title: 'Ascension',
-    price: 'Custom',
-    description: 'Total brand transformation and viral strategy.',
-    features: ['Full Brand Identity', 'Unlimited Asset Generation', 'Viral Strategy Blueprint', 'Web Design Consultation', 'Priority Support']
+    title: 'پکیج پیشرفته',
+    price: '۹۵,۰۰۰,۰۰۰ تومان',
+    description: 'تحول کامل برند و استراتژی ویروسی.',
+    features: [
+      'کمپین کامل (بیش از ۱۵ دارایی)',
+      '۱ فیلم برند سینمایی (4K)',
+      'لوک‌بوک دیجیتال (لی‌اوت PDF)',
+      'طراحی صدای حرفه‌ای',
+      '۳ دور بازبینی + مشاوره مدیر خلاق'
+    ],
+    bonus: 'شامل "دک ویژن آینده" (مفاهیم فصل بعدی)',
+    whatsappMessage: 'سلام، برای پکیج پیشرفته و تحول برند تماس می‌گیرم.'
   }
 ];
 
@@ -94,6 +117,13 @@ const App: React.FC = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const openWhatsApp = (message: string) => {
+    // Replace with actual phone number
+    const phoneNumber = "989123456789"; 
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   };
 
   return (
@@ -258,7 +288,8 @@ const App: React.FC = () => {
              <p className="text-gray-400 max-w-xl mx-auto uppercase tracking-widest text-sm">Elevate your brand aesthetic</p>
            </div>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           {/* Cards Grid */}
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
              {PACKAGES.map((pkg, i) => (
                <motion.div
                  key={i}
@@ -266,7 +297,7 @@ const App: React.FC = () => {
                  whileInView={{ opacity: 1, y: 0 }}
                  viewport={{ once: true }}
                  transition={{ delay: i * 0.2 }}
-                 className={`relative p-8 md:p-12 flex flex-col justify-between group overflow-hidden ${pkg.isPopular ? 'border border-white/40 bg-white/5' : 'border border-white/10 bg-black/20'}`}
+                 className={`relative flex flex-col justify-between group overflow-hidden font-persian ${pkg.isPopular ? 'border border-white/40 bg-white/5' : 'border border-white/10 bg-black/20'}`}
                  style={{
                    boxShadow: pkg.isPopular ? '0 0 50px rgba(255,255,255,0.05)' : 'none'
                  }}
@@ -274,36 +305,82 @@ const App: React.FC = () => {
                  {/* Glass Reflection */}
                  <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-y-12 translate-y-[-50%]" />
 
-                 <div>
-                   <div className="flex justify-between items-center mb-8">
+                 <div className="p-8 md:p-12 text-right" dir="rtl">
+                   <div className="flex justify-between items-center mb-8 flex-row-reverse">
                       {i === 0 && <Aperture className="w-8 h-8 text-gray-500" />}
                       {i === 1 && <Layers className="w-8 h-8 text-white" />}
                       {i === 2 && <Fingerprint className="w-8 h-8 text-gray-500" />}
-                      {pkg.isPopular && <span className="text-[10px] font-bold bg-white text-black px-2 py-1 uppercase tracking-widest">Most Popular</span>}
+                      {pkg.isPopular && <span className="text-[10px] font-bold bg-white text-black px-2 py-1 uppercase tracking-widest font-heading">Most Popular</span>}
                    </div>
                    
-                   <h3 className="text-3xl font-heading font-bold mb-2">{pkg.title}</h3>
-                   <div className="text-4xl font-light text-gray-300 mb-8 font-mono">{pkg.price}</div>
-                   <p className="text-sm text-gray-400 border-b border-white/10 pb-8 mb-8">{pkg.description}</p>
+                   <h3 className="text-3xl font-bold mb-2">{pkg.title}</h3>
+                   <div className="text-4xl font-light text-blue-300 mb-8 tracking-tight">{pkg.price}</div>
                    
-                   <ul className="space-y-4">
+                   <ul className="space-y-4 mb-8">
                      {pkg.features.map((feature, fIdx) => (
                        <li key={fIdx} className="flex items-center gap-3 text-sm text-gray-300">
-                         <span className="w-1 h-1 bg-white rounded-full" />
+                         <span className="w-1.5 h-1.5 bg-white rounded-full flex-shrink-0" />
                          {feature}
                        </li>
                      ))}
                    </ul>
+
+                   {pkg.bonus && (
+                     <div className="mb-8 p-4 bg-white/5 border border-white/10 rounded-lg">
+                        <div className="flex items-center gap-2 text-[#ff4d4d] mb-1 font-bold text-sm">
+                          <Gem className="w-4 h-4" />
+                          <span>جایزه محدود</span>
+                        </div>
+                        <p className="text-xs text-gray-400 leading-relaxed">{pkg.bonus}</p>
+                     </div>
+                   )}
                  </div>
 
-                 <button 
-                  className="mt-12 w-full py-4 border border-white/20 uppercase text-xs font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300"
-                  data-hover="true"
-                 >
-                   Inquire
-                 </button>
+                 <div className="p-8 md:p-12 pt-0">
+                  <button 
+                    onClick={() => openWhatsApp(pkg.whatsappMessage || '')}
+                    className="w-full py-4 border border-white/20 font-persian font-bold text-sm hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+                    data-hover="true"
+                  >
+                    رزرو پکیج
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
+                 </div>
                </motion.div>
              ))}
+           </div>
+
+           {/* Terms & Protocols Section */}
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/10 font-persian" dir="rtl">
+             <div className="space-y-4 text-right">
+                <div className="flex items-center gap-3 text-white">
+                  <CreditCard className="w-6 h-6 text-gray-400" />
+                  <h4 className="font-bold text-lg">ساختار پرداخت</h4>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  برای رزرو جایگاه تولید، ۵۰٪ پیش‌پرداخت لازم هست. ۵۰٪ باقی‌مانده بعد از تکمیل کار و قبل از تحویل فایل‌های باکیفیت بالا و بدون واترمارک پرداخت می‌شه.
+                </p>
+             </div>
+             
+             <div className="space-y-4 text-right">
+                <div className="flex items-center gap-3 text-white">
+                  <RefreshCw className="w-6 h-6 text-gray-400" />
+                  <h4 className="font-bold text-lg">پروتکل بازبینی</h4>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  ما بین "اصلاحات فنی" (نامحدود) و "تغییرات خلاقانه" (محدود به پکیج) تفاوت قائل می‌شیم. اگر مفهوم اصلی بعد از تولید تغییر کنه، هزینه کمیسیون جدید اعمال می‌شه.
+                </p>
+             </div>
+
+             <div className="space-y-4 text-right">
+                <div className="flex items-center gap-3 text-white">
+                  <ShieldCheck className="w-6 h-6 text-gray-400" />
+                  <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
+                </div>
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                </p>
+             </div>
            </div>
         </div>
       </section>
