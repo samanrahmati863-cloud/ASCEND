@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -8,8 +9,8 @@ import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-// import AIChat from './components/AIChat'; // <--- موقتا غیرفعال شد تا سایت بالا بیاید
-// import VideoBackground from './components/VideoBackground'; 
+import AIChat from './components/AIChat';
+import VideoBackground from './components/VideoBackground';
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -61,7 +62,7 @@ const PORTFOLIO: Project[] = [
 const PACKAGES: ServicePackage[] = [
   {
     title: 'پکیج پایه',
-    price: '۱۹,۸۰۰,۰۰۰ تومان',
+    price: '۱۹,۸۰۰,۰۰۰ تومان (IRT)',
     description: 'شروع قدرتمند برای حضور در شبکه‌های اجتماعی.',
     features: [
       '۱ ردیف کامل پست‌های گرید (۳ پست شبکه‌ای) – برای نمایش ساده محصولاتتون روی اینستاگرام',
@@ -74,7 +75,7 @@ const PACKAGES: ServicePackage[] = [
   },
   {
     title: 'پکیج استاندارد',
-    price: '۴۸,۰۰۰,۰۰۰ تومان',
+    price: '۴۸,۰۰۰,۰۰۰ تومان (IRT)',
     description: 'کمپین کامل برای تاثیرگذاری حداکثری.',
     isPopular: true,
     features: [
@@ -89,7 +90,7 @@ const PACKAGES: ServicePackage[] = [
   },
   {
     title: 'پکیج پیشرفته',
-    price: '۹۵,۰۰۰,۰۰۰ تومان',
+    price: '۹۵,۰۰۰,۰۰۰ تومان (IRT)',
     description: 'تحول کامل برند و استراتژی ویروسی.',
     features: [
       'کمپین کامل (بیش از ۱۵ دارایی) – مجموعه‌ای از تصاویر و ویدیوها برای پوشش کامل فصل یا محصول',
@@ -119,6 +120,7 @@ const App: React.FC = () => {
   };
 
   const openWhatsApp = (message: string) => {
+    // Replace with actual phone number
     const phoneNumber = "989913851865"; 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -127,8 +129,11 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      {/* <AIChat /> <--- این خط کامنت شد */}
+      <AIChat />
       
+      {/* Video Background Commented Out to fix potential crash on deployment */}
+      {/* <VideoBackground /> */}
+
       {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
         {/* Logo Centered - Adjusted size and tracking */}
@@ -373,7 +378,7 @@ const App: React.FC = () => {
                   <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. ASCEND حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
                 </p>
              </div>
            </div>
@@ -396,7 +401,7 @@ const App: React.FC = () => {
              <a href="mailto:hello@ascend.agency" className="text-xl md:text-2xl text-white hover:text-gray-400 transition-colors">hello@ascend.agency</a>
              <div className="flex gap-8 justify-end items-center">
                <a 
-                 href="https://instagram.com/beruded" 
+                 href="https://instagram.com/ascend" 
                  target="_blank" 
                  rel="noopener noreferrer" 
                  className="text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline"
