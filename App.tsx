@@ -19,49 +19,49 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    image: '/images/publicimagesproject1_cover.jpg.jpg',
+    image: '/images/project1_cover.jpg',
     description: 'High-contrast portraiture for the digital age.',
-    galleryImages: ['/images/publicimagesproject1_cover.jpg.jpg', '/images/publicimagesproject1_cover.jpg.jpg']
+    galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
   { 
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    image: '/images/publicimagesproject2_cover.jpg.jpg',
+    image: '/images/project2_cover.jpg',
     description: 'Gothic futurism meets luxury streetwear.',
-    galleryImages: ['/images/publicimagesproject2_cover.jpg.jpg', '/images/publicimagesproject2_cover.jpg.jpg']
+    galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
   { 
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    image: '/images/publicimagesproject3_cover.jpg.jpg',
+    image: '/images/project3_cover.jpg',
     description: 'Generative fluid simulations for fabric rendering.',
-    galleryImages: ['/images/publicimagesproject3_cover.jpg.jpg', '/images/publicimagesproject3_cover.jpg.jpg']
+    galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
   },
   { 
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    image: '/images/publicimagesproject4_cover.jpg.jpeg',
+    image: '/images/project4_cover.jpg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
-    galleryImages: ['/images/publicimagesproject4_cover.jpg.jpeg', '/images/publicimagesproject4_cover.jpg.jpeg']
+    galleryImages: ['/images/project4_gal1.jpg', '/images/project4_gal2.jpg']
   },
   { 
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    image: '/images/publicimagesproject5_cover.jpg.jpg',
+    image: '/images/project5_cover.jpg',
     description: 'Perfectly imperfect digital humans.',
-    galleryImages: ['/images/publicimagesproject5_cover.jpg.jpg', '/images/publicimagesproject5_cover.jpg.jpg']
+    galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
   { 
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    image: '/images/publicimagesproject6_cover.jpg.png',
+    image: '/images/project6_cover.jpg',
     description: 'Refractive visuals for accessory launch.',
-    galleryImages: ['/images/publicimagesproject6_cover.jpg.png', '/images/publicimagesproject6_cover.jpg.png']
+    galleryImages: ['/images/project6_gal1.jpg', '/images/project6_gal2.jpg']
   },
 ];
 
