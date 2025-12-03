@@ -29,7 +29,7 @@ const PORTFOLIO: Project[] = [
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
     // اصلاح شده
-    image: 'images/publicimagesproject2_cover.jpg.',
+    image: 'images/publicimagesproject2_cover.jpg.jpg',
     description: 'Gothic futurism meets luxury streetwear.',
     galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
