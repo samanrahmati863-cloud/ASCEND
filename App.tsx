@@ -19,8 +19,8 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    // آدرس صحیح: /images/project1_cover.jpg
-    image: 'public/images/publicimagesproject1_cover.jpg.jpg', 
+    // اصلاح شده: مسیر باید با / شروع شود و public حذف شود
+    image: '/images/publicimagesproject1_cover.jpg.jpg', 
     description: 'High-contrast portraiture for the digital age.',
     galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
@@ -28,8 +28,8 @@ const PORTFOLIO: Project[] = [
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    // آدرس صحیح
-    image: 'ASCEND/public/images/publicimagesproject2_cover.jpg.',
+    // اصلاح شده
+    image: '/images/publicimagesproject2_cover.jpg.',
     description: 'Gothic futurism meets luxury streetwear.',
     galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
@@ -37,8 +37,8 @@ const PORTFOLIO: Project[] = [
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    // آدرس صحیح
-    image: 'public/images/publicimagesproject3_cover.jpg.jpg',
+    // اصلاح شده
+    image: '/images/publicimagesproject3_cover.jpg.jpg',
     description: 'Generative fluid simulations for fabric rendering.',
     galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
   },
@@ -46,8 +46,8 @@ const PORTFOLIO: Project[] = [
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    // آدرس صحیح
-    image: 'public/images/publicimagesproject4_cover.jpg.jpeg',
+    // اصلاح شده
+    image: '/images/publicimagesproject4_cover.jpg.jpeg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
     galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
   },
@@ -55,8 +55,8 @@ const PORTFOLIO: Project[] = [
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    // آدرس صحیح
-    image: 'public/images/publicimagesproject5_cover.jpg.jpg',
+    // اصلاح شده
+    image: '/images/publicimagesproject5_cover.jpg.jpg',
     description: 'Perfectly imperfect digital humans.',
     galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
@@ -64,13 +64,12 @@ const PORTFOLIO: Project[] = [
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    // آدرس صحیح
-    image: 'public/images/publicimagesproject6_cover.jpg.jpg',
+    // اصلاح شده
+    image: '/images/publicimagesproject6_cover.jpg.jpg',
     description: 'Refractive visuals for accessory launch.',
     galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
   },
 ];
-// ... (بقیه آرایه PACKAGES بدون تغییر)
 
 const PACKAGES: ServicePackage[] = [
   {
