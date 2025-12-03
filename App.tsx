@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -9,8 +8,8 @@ import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-import AIChat from './components/AIChat';
-import VideoBackground from './components/VideoBackground';
+// import AIChat from './components/AIChat'; // همچنان غیرفعال است
+// import VideoBackground from './components/VideoBackground'; // همچنان غیرفعال است
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -19,51 +18,53 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    image: '/images/project1_cover.jpg',
+    // آدرس صحیح: /images/ + نام فایل کاور واقعی شما
+    image: '/images/publicimagesproject1_cover.jpg.jpg', 
     description: 'High-contrast portraiture for the digital age.',
-    galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject1_gal1.jpg.jpg', '/images/publicimagesproject1_gal2.jpg.jpg']
   },
   { 
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    image: '/images/project2_cover.jpg',
+    image: '/images/publicimagesproject2_cover.jpg.jpg',
     description: 'Gothic futurism meets luxury streetwear.',
-    galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject2_gal1.jpg.jpg', '/images/publicimagesproject2_gal2.jpg.jpg']
   },
   { 
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    image: '/images/project3_cover.jpg',
+    image: '/images/publicimagesproject3_cover.jpg.jpg',
     description: 'Generative fluid simulations for fabric rendering.',
-    galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject3_gal1.jpg.jpg', '/images/publicimagesproject3_gal2.jpg.jpg']
   },
   { 
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    image: '/images/project4_cover.jpg',
+    image: '/images/publicimagesproject4_cover.jpg.jpeg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
-    galleryImages: ['/images/project4_gal1.jpg', '/images/project4_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject4_gal1.jpg.jpeg', '/images/publicimagesproject4_gal2.jpg.jpeg']
   },
   { 
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    image: '/images/project5_cover.jpg',
+    image: '/images/publicimagesproject5_cover.jpg.jpg',
     description: 'Perfectly imperfect digital humans.',
-    galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject5_gal1.jpg.jpg', '/images/publicimagesproject5_gal2.jpg.jpg']
   },
   { 
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    image: '/images/project6_cover.jpg',
+    image: '/images/publicimagesproject6_cover.jpg.png',
     description: 'Refractive visuals for accessory launch.',
-    galleryImages: ['/images/project6_gal1.jpg', '/images/project6_gal2.jpg']
+    galleryImages: ['/images/publicimagesproject6_gal1.jpg.png', '/images/publicimagesproject6_gal2.jpg.png']
   },
 ];
+// ... (بقیه آرایه PACKAGES بدون تغییر)
 
 const PACKAGES: ServicePackage[] = [
   {
@@ -127,20 +128,20 @@ const App: React.FC = () => {
   };
 
   const openWhatsApp = (message: string) => {
-    // Replace with actual phone number
     const phoneNumber = "989913851865"; 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };
 
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
+
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      <AIChat />
+      {/* <AIChat /> */}
       
-      {/* Video Background Commented Out to fix potential crash on deployment */}
-      {/* <VideoBackground /> */}
-
       {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
         {/* Logo Centered - Adjusted size and tracking */}
@@ -386,7 +387,7 @@ const App: React.FC = () => {
                   <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. ASCEND حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
                 </p>
              </div>
            </div>
@@ -409,7 +410,7 @@ const App: React.FC = () => {
              <a href="mailto:hello@ascend.agency" className="text-xl md:text-2xl text-white hover:text-gray-400 transition-colors">hello@ascend.agency</a>
              <div className="flex gap-8 justify-end items-center">
                <a 
-                 href="https://instagram.com/ascend" 
+                 href="https://instagram.com/beruded" 
                  target="_blank" 
                  rel="noopener noreferrer" 
                  className="text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline"
@@ -447,7 +448,7 @@ const App: React.FC = () => {
           >
             {/* Close Button */}
             <button
-              onClick={() => setSelectedProject(null)}
+              onClick={closeModal}
               className="fixed top-8 right-8 text-white z-50 hover:rotate-90 transition-transform duration-300"
             >
               <X size={40} />
