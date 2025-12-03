@@ -19,43 +19,49 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    image: '/images/my_project_1_cover.jpg',
-    description: 'High-contrast portraiture for the digital age.'
+    image: '/images/publicimagesproject1_cover.jpg.jpg',
+    description: 'High-contrast portraiture for the digital age.',
+    galleryImages: ['/images/publicimagesproject1_cover.jpg.jpg', '/images/publicimagesproject1_cover.jpg.jpg']
   },
   { 
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    image: '/images/my_project_2_cover.jpg',
-    description: 'Gothic futurism meets luxury streetwear.'
+    image: '/images/publicimagesproject2_cover.jpg.jpg',
+    description: 'Gothic futurism meets luxury streetwear.',
+    galleryImages: ['/images/publicimagesproject2_cover.jpg.jpg', '/images/publicimagesproject2_cover.jpg.jpg']
   },
   { 
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    image: '/images/my_project_3_cover.jpg',
-    description: 'Generative fluid simulations for fabric rendering.'
+    image: '/images/publicimagesproject3_cover.jpg.jpg',
+    description: 'Generative fluid simulations for fabric rendering.',
+    galleryImages: ['/images/publicimagesproject3_cover.jpg.jpg', '/images/publicimagesproject3_cover.jpg.jpg']
   },
   { 
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    image:  '/images/my_project_4_cover.jpg',
-    description: 'Merging cultural heritage with cyberpunk aesthetics.'
+    image: '/images/publicimagesproject4_cover.jpg.jpeg',
+    description: 'Merging cultural heritage with cyberpunk aesthetics.',
+    galleryImages: ['/images/publicimagesproject4_cover.jpg.jpeg', '/images/publicimagesproject4_cover.jpg.jpeg']
   },
   { 
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    image: '/images/my_project_5_cover.jpg',
-    description: 'Perfectly imperfect digital humans.'
+    image: '/images/publicimagesproject5_cover.jpg.jpg',
+    description: 'Perfectly imperfect digital humans.',
+    galleryImages: ['/images/publicimagesproject5_cover.jpg.jpg', '/images/publicimagesproject5_cover.jpg.jpg']
   },
   { 
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    image: '/images/my_project_6_cover.jpg',
-    description: 'Refractive visuals for accessory launch.'
+    image: '/images/publicimagesproject6_cover.jpg.png',
+    description: 'Refractive visuals for accessory launch.',
+    galleryImages: ['/images/publicimagesproject6_cover.jpg.png', '/images/publicimagesproject6_cover.jpg.png']
   },
 ];
 
@@ -107,6 +113,7 @@ const PACKAGES: ServicePackage[] = [
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
@@ -247,6 +254,7 @@ const App: React.FC = () => {
             {PORTFOLIO.map((project, idx) => (
               <motion.div 
                 key={project.id}
+                onClick={() => setSelectedProject(project)}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -427,6 +435,64 @@ const App: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* PROJECT GALLERY MODAL */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="fixed top-8 right-8 text-white z-50 hover:rotate-90 transition-transform duration-300"
+            >
+              <X size={40} />
+            </button>
+
+            <div className="max-w-7xl mx-auto px-4 py-24 md:py-32">
+              <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="mb-12"
+              >
+                <span className="text-blue-400 font-mono text-sm uppercase tracking-widest mb-4 block">{selectedProject.category}</span>
+                <h2 className="text-5xl md:text-8xl font-heading font-bold uppercase mb-6">{selectedProject.title}</h2>
+                <p className="text-gray-300 text-lg md:text-xl max-w-2xl font-light">{selectedProject.description}</p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                {/* Main Cover */}
+                <motion.div
+                   initial={{ y: 50, opacity: 0 }}
+                   animate={{ y: 0, opacity: 1 }}
+                   transition={{ delay: 0.3 }}
+                   className="md:col-span-2 aspect-video w-full overflow-hidden"
+                >
+                  <img src={selectedProject.image} alt="Cover" className="w-full h-full object-cover" />
+                </motion.div>
+
+                {/* Gallery Images */}
+                {selectedProject.galleryImages.map((img, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 + (index * 0.1) }}
+                    className="aspect-[4/5] w-full overflow-hidden"
+                  >
+                    <img src={img} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

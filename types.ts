@@ -10,6 +10,7 @@ export interface Project {
   category: string;
   image: string;
   description: string;
+  galleryImages: string[];
 }
 
 export interface ServicePackage {
@@ -36,14 +37,6 @@ export interface Artist {
   image: string;
 }
 
-export interface Project {
-  id: string;
-  title: string;
-  category: string;
-  image: string;
-  description: string;
-  galleryImages: string[]; 
-}
 export enum Section {
   HERO = 'hero',
   WORK = 'work',
