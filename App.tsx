@@ -20,7 +20,7 @@ const PORTFOLIO: Project[] = [
     title: 'Void Aesthetic', 
     category: 'Editorial', 
     // اصلاح شده: مسیر باید با / شروع شود و public حذف شود
-    image: '/images/publicimagesproject1_cover.jpg.jpg', 
+    image: 'images/publicimagesproject1_cover.jpg.jpg', 
     description: 'High-contrast portraiture for the digital age.',
     galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
@@ -29,7 +29,7 @@ const PORTFOLIO: Project[] = [
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
     // اصلاح شده
-    image: '/images/publicimagesproject2_cover.jpg.',
+    image: 'images/publicimagesproject2_cover.jpg.',
     description: 'Gothic futurism meets luxury streetwear.',
     galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
@@ -38,7 +38,7 @@ const PORTFOLIO: Project[] = [
     title: 'Liquid Silk', 
     category: 'Motion', 
     // اصلاح شده
-    image: '/images/publicimagesproject3_cover.jpg.jpg',
+    image: 'images/publicimagesproject3_cover.jpg.jpg',
     description: 'Generative fluid simulations for fabric rendering.',
     galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
   },
@@ -47,7 +47,7 @@ const PORTFOLIO: Project[] = [
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
     // اصلاح شده
-    image: '/images/publicimagesproject4_cover.jpg.jpeg',
+    image: 'images/publicimagesproject4_cover.jpg.jpeg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
     galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
   },
@@ -56,7 +56,7 @@ const PORTFOLIO: Project[] = [
     title: 'Ethereal Models', 
     category: 'AI Cast', 
     // اصلاح شده
-    image: '/images/publicimagesproject5_cover.jpg.jpg',
+    image: 'images/publicimagesproject5_cover.jpg.jpg',
     description: 'Perfectly imperfect digital humans.',
     galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
@@ -65,7 +65,7 @@ const PORTFOLIO: Project[] = [
     title: 'Glass Reality', 
     category: 'Lookbook', 
     // اصلاح شده
-    image: '/images/publicimagesproject6_cover.jpg.jpg',
+    image: 'images/publicimagesproject6_cover.jpg.jpg',
     description: 'Refractive visuals for accessory launch.',
     galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
   },
