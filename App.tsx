@@ -8,8 +8,9 @@ import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-// import AIChat from './components/AIChat'; // همچنان غیرفعال است
-// import VideoBackground from './components/VideoBackground'; // همچنان غیرفعال است
+// اگر این دو فایل وجود ندارند یا از آنها استفاده نمی‌کنید، بهتر است کامنت بمانند یا حذف شوند
+// import AIChat from './components/AIChat'; 
+// import VideoBackground from './components/VideoBackground'; 
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -18,50 +19,55 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    // آدرس صحیح: /images/ + نام فایل کاور واقعی شما
-    image: '/images/publicimagesproject1_cover.jpg.jpg', 
+    // آدرس صحیح: /images/project1_cover.jpg
+    image: '/images/project1_cover.jpg', 
     description: 'High-contrast portraiture for the digital age.',
-    galleryImages: ['/images/publicimagesproject1_gal1.jpg.jpg', '/images/publicimagesproject1_gal2.jpg.jpg']
+    galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
   { 
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    image: '/images/publicimagesproject2_cover.jpg.jpg',
+    // آدرس صحیح
+    image: '/images/project2_cover.jpg',
     description: 'Gothic futurism meets luxury streetwear.',
-    galleryImages: ['/images/publicimagesproject2_gal1.jpg.jpg', '/images/publicimagesproject2_gal2.jpg.jpg']
+    galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
   { 
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    image: '/images/publicimagesproject3_cover.jpg.jpg',
+    // آدرس صحیح
+    image: '/images/project3_cover.jpg',
     description: 'Generative fluid simulations for fabric rendering.',
-    galleryImages: ['/images/publicimagesproject3_gal1.jpg.jpg', '/images/publicimagesproject3_gal2.jpg.jpg']
+    galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
   },
   { 
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    image: '/images/publicimagesproject4_cover.jpg.jpeg',
+    // آدرس صحیح
+    image: '/images/project4_cover.jpeg', // اگر پسوند این فایل jpeg است
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
-    galleryImages: ['/images/publicimagesproject4_gal1.jpg.jpeg', '/images/publicimagesproject4_gal2.jpg.jpeg']
+    galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
   },
   { 
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    image: '/images/publicimagesproject5_cover.jpg.jpg',
+    // آدرس صحیح
+    image: '/images/project5_cover.jpg',
     description: 'Perfectly imperfect digital humans.',
-    galleryImages: ['/images/publicimagesproject5_gal1.jpg.jpg', '/images/publicimagesproject5_gal2.jpg.jpg']
+    galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
   { 
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    image: '/images/publicimagesproject6_cover.jpg.png',
+    // آدرس صحیح
+    image: '/images/project6_cover.png', // اگر پسوند این فایل png است
     description: 'Refractive visuals for accessory launch.',
-    galleryImages: ['/images/publicimagesproject6_gal1.jpg.png', '/images/publicimagesproject6_gal2.jpg.png']
+    galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
   },
 ];
 // ... (بقیه آرایه PACKAGES بدون تغییر)
@@ -387,7 +393,7 @@ const App: React.FC = () => {
                   <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. ASCEND حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
                 </p>
              </div>
            </div>
