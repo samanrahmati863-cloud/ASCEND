@@ -47,7 +47,7 @@ const PORTFOLIO: Project[] = [
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
     // آدرس صحیح
-    image: 'public/images/publicimagesproject4_cover.jpg.jpeg
+    image: 'public/images/publicimagesproject4_cover.jpg.jpeg',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
     galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
   },
@@ -56,7 +56,7 @@ const PORTFOLIO: Project[] = [
     title: 'Ethereal Models', 
     category: 'AI Cast', 
     // آدرس صحیح
-    image: 'public/images/publicimagesproject5_cover.jpg.jpg
+    image: 'public/images/publicimagesproject5_cover.jpg.jpg',
     description: 'Perfectly imperfect digital humans.',
     galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
@@ -65,7 +65,7 @@ const PORTFOLIO: Project[] = [
     title: 'Glass Reality', 
     category: 'Lookbook', 
     // آدرس صحیح
-    image: 'public/images/publicimagesproject6_cover.jpg.jpg
+    image: 'public/images/publicimagesproject6_cover.jpg.jpg',
     description: 'Refractive visuals for accessory launch.',
     galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
   },
