@@ -20,7 +20,7 @@ const PORTFOLIO: Project[] = [
     title: 'Void Aesthetic', 
     category: 'Editorial', 
     // اصلاح شده: مسیر باید با / شروع شود و public حذف شود
-    image: 'public/images/publicimagesproject1_cover.jpg.mp4', 
+    video: 'public/images/publicimagesproject1_cover.jpg.mp4', 
     description: 'High-contrast portraiture for the digital age.',
     galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
