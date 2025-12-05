@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -8,7 +7,7 @@ export interface Project {
   id: string;
   title: string;
   category: string;
-  image: string;
+  video: string; // تغییر از image به video
   description: string;
   galleryImages: string[];
 }
@@ -39,7 +38,7 @@ export interface Artist {
 
 export enum Section {
   HERO = 'hero',
-  WORK = 'work',
+  WORK = 'work',\
   SERVICES = 'services',
   CONTACT = 'contact',
 }
