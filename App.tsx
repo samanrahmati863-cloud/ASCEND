@@ -3,14 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-// اگر این دو فایل وجود ندارند یا از آنها استفاده نمی‌کنید، بهتر است کامنت بمانند یا حذف شوند
 // import AIChat from './components/AIChat'; 
-// import VideoBackground from './components/VideoBackground'; 
 import { Project, ServicePackage } from './types';
 
 // Data
@@ -19,8 +17,7 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    // اصلاح شده: مسیر باید با / شروع شود و public حذف شود
-    video: 'public/images/publicimagesproject1_cover.jpg.mp4', 
+    video: '/images/project1_cover.mp4', // تغییر به ویدیو
     description: 'High-contrast portraiture for the digital age.',
     galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
@@ -28,8 +25,7 @@ const PORTFOLIO: Project[] = [
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    // اصلاح شده
-    image: 'images/publicimagesproject2_cover.jpg.jpg',
+    video: '/images/project2_cover.mp4',
     description: 'Gothic futurism meets luxury streetwear.',
     galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
@@ -37,8 +33,7 @@ const PORTFOLIO: Project[] = [
     id: '3', 
     title: 'Liquid Silk', 
     category: 'Motion', 
-    // اصلاح شده
-    image: 'images/publicimagesproject3_cover.jpg.jpg',
+    video: '/images/project3_cover.mp4',
     description: 'Generative fluid simulations for fabric rendering.',
     galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
   },
@@ -46,8 +41,7 @@ const PORTFOLIO: Project[] = [
     id: '4', 
     title: 'Neo-Tehran', 
     category: 'Brand Identity', 
-    // اصلاح شده
-    image: 'images/publicimagesproject4_cover.jpg.jpeg',
+    video: '/images/project4_cover.mp4',
     description: 'Merging cultural heritage with cyberpunk aesthetics.',
     galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
   },
@@ -55,8 +49,7 @@ const PORTFOLIO: Project[] = [
     id: '5', 
     title: 'Ethereal Models', 
     category: 'AI Cast', 
-    // اصلاح شده
-    image: 'images/publicimagesproject5_cover.jpg.jpg',
+    video: '/images/project5_cover.mp4',
     description: 'Perfectly imperfect digital humans.',
     galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
   },
@@ -64,8 +57,7 @@ const PORTFOLIO: Project[] = [
     id: '6', 
     title: 'Glass Reality', 
     category: 'Lookbook', 
-    // اصلاح شده
-    image: 'images/publicimagesproject6_cover.jpg.jpg',
+    video: '/images/project6_cover.mp4',
     description: 'Refractive visuals for accessory launch.',
     galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
   },
@@ -116,6 +108,73 @@ const PACKAGES: ServicePackage[] = [
   }
 ];
 
+// کامپوننت جدید برای مدیریت ویدیوها
+const ProjectCard = ({ project, onClick, index }: { project: Project; onClick: (p: Project) => void; index: number }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    // در دسکتاپ با هاور پلی شود
+    if (window.innerWidth >= 768) {
+      videoRef.current?.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // در دسکتاپ با رفتن موس متوقف شود
+    if (window.innerWidth >= 768) {
+      videoRef.current?.pause();
+      if (videoRef.current) videoRef.current.currentTime = 0; // برگرشت به اول
+    }
+  };
+
+  const handleViewportEnter = () => {
+    // در موبایل وقتی اسکرول شد و دیده شد پلی شود
+    if (window.innerWidth < 768) {
+      videoRef.current?.play().catch(() => {});
+    }
+  };
+
+  return (
+    <motion.div 
+      key={project.id}
+      onClick={() => onClick(project)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      onViewportEnter={handleViewportEnter} // تشخیص ورود به صفحه برای موبایل
+      transition={{ delay: index * 0.1 }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="group relative aspect-[3/4] overflow-hidden bg-[#050505] border border-white/5 cursor-pointer"
+      data-hover="true"
+    >
+      <video
+        ref={videoRef}
+        src={project.video}
+        muted
+        loop
+        playsInline
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" // کلاس grayscale حذف شد
+      />
+      
+      {/* Liquid Glass Overlay on Hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-transparent to-white/5 backdrop-blur-[2px]" />
+      
+      <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22, 1, 0.36, 1]">
+        <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <span className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-1 block">{project.category}</span>
+              <h3 className="text-2xl font-heading font-bold uppercase">{project.title}</h3>
+            </div>
+            <ArrowUpRight className="w-5 h-5 text-white" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -147,9 +206,7 @@ const App: React.FC = () => {
       <CustomCursor />
       {/* <AIChat /> */}
       
-      {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
-        {/* Logo Centered - Adjusted size and tracking */}
         <div 
           className="text-3xl font-heading font-black tracking-widest text-white z-50 cursor-pointer text-center" 
           onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
@@ -158,7 +215,6 @@ const App: React.FC = () => {
           ASCEND
         </div>
         
-        {/* Desktop Links - Absolute Positioning to keep logo centered */}
         <div className="absolute right-8 hidden md:flex gap-12 items-center">
           {['Work', 'Services', 'Contact'].map((item) => (
             <button 
@@ -173,7 +229,6 @@ const App: React.FC = () => {
           ))}
         </div>
 
-        {/* Mobile Menu Button - Absolute Right */}
         <button 
           className="absolute right-6 md:hidden z-50 text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -182,7 +237,6 @@ const App: React.FC = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -204,7 +258,6 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* HERO SECTION */}
       <header className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 overflow-hidden">
         <div className="z-10 text-center max-w-5xl">
           <motion.div
@@ -233,7 +286,6 @@ const App: React.FC = () => {
           </motion.p>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div 
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50"
           animate={{ y: [0, 10, 0] }}
@@ -258,37 +310,13 @@ const App: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {PORTFOLIO.map((project, idx) => (
-              <motion.div 
-                key={project.id}
-                onClick={() => setSelectedProject(project)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="group relative aspect-[3/4] overflow-hidden bg-[#050505] border border-white/5 cursor-pointer"
-                data-hover="true"
-              >
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
-                />
-                
-                {/* Liquid Glass Overlay on Hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-transparent to-white/5 backdrop-blur-[2px]" />
-                
-                <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22, 1, 0.36, 1]">
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-4">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-1 block">{project.category}</span>
-                        <h3 className="text-2xl font-heading font-bold uppercase">{project.title}</h3>
-                      </div>
-                      <ArrowUpRight className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              // استفاده از کامپوننت جدید ProjectCard
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={idx} 
+                onClick={setSelectedProject} 
+              />
             ))}
           </div>
         </div>
@@ -302,7 +330,6 @@ const App: React.FC = () => {
              <p className="text-gray-400 max-w-xl mx-auto uppercase tracking-widest text-sm">Elevate your brand aesthetic</p>
            </div>
 
-           {/* Cards Grid */}
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
              {PACKAGES.map((pkg, i) => (
                <motion.div
@@ -316,7 +343,6 @@ const App: React.FC = () => {
                    boxShadow: pkg.isPopular ? '0 0 50px rgba(255,255,255,0.05)' : 'none'
                  }}
                >
-                 {/* Glass Reflection */}
                  <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-y-12 translate-y-[-50%]" />
 
                  <div className="p-8 md:p-12 text-right" dir="rtl">
@@ -364,7 +390,6 @@ const App: React.FC = () => {
              ))}
            </div>
 
-           {/* Terms & Protocols Section */}
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 border-t border-white/10 font-persian" dir="rtl">
              <div className="space-y-4 text-right">
                 <div className="flex items-center gap-3 text-white">
@@ -392,14 +417,13 @@ const App: React.FC = () => {
                   <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. ASCEND حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
                 </p>
              </div>
            </div>
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer id="contact" className="relative z-10 pt-32 pb-12 px-4 md:px-8 border-t border-white/10 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start">
           <div className="mb-12 md:mb-0">
@@ -451,7 +475,6 @@ const App: React.FC = () => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto"
           >
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="fixed top-8 right-8 text-white z-50 hover:rotate-90 transition-transform duration-300"
@@ -472,14 +495,15 @@ const App: React.FC = () => {
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                {/* Main Cover */}
+                {/* Main Cover - Updated to use VIDEO in Modal */}
                 <motion.div
                    initial={{ y: 50, opacity: 0 }}
                    animate={{ y: 0, opacity: 1 }}
                    transition={{ delay: 0.3 }}
                    className="md:col-span-2 aspect-video w-full overflow-hidden"
                 >
-                  <img src={selectedProject.image} alt="Cover" className="w-full h-full object-cover" />
+                   {/* استفاده از ویدیو در مودال */}
+                  <video src={selectedProject.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
                 </motion.div>
 
                 {/* Gallery Images */}
