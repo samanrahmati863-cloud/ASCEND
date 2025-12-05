@@ -25,7 +25,7 @@ const PORTFOLIO: Project[] = [
     id: '2', 
     title: 'Chrome Hearts Vibe', 
     category: 'Campaign', 
-    video: 'images/publicimagesproject2_cover.jpg.mp4,
+    video: 'images/publicimagesproject2_cover.jpg.mp4',
     description: 'Gothic futurism meets luxury streetwear.',
     galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
   },
