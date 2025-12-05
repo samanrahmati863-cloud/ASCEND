@@ -17,7 +17,7 @@ const PORTFOLIO: Project[] = [
     id: '1', 
     title: 'Void Aesthetic', 
     category: 'Editorial', 
-    video: '/images/project1_cover.mp4', // تغییر به ویدیو
+    video: '/images/publicimagesproject1_cover.jpg.mp4', // تغییر به ویدیو
     description: 'High-contrast portraiture for the digital age.',
     galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
   },
