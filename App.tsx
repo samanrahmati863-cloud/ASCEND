@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck, MessageCircle } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 // import AIChat from './components/AIChat'; 
@@ -93,7 +93,7 @@ const App: React.FC = () => {
           ASCEND
         </div>
         
-        {/* Desktop Links - "Work" removed */}
+        {/* Desktop Links */}
         <div className="absolute right-8 hidden md:flex gap-12 items-center">
           {['Services', 'Contact'].map((item) => (
             <button 
@@ -116,7 +116,7 @@ const App: React.FC = () => {
         </button>
       </nav>
 
-      {/* Mobile Menu - "Work" removed */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -175,8 +175,6 @@ const App: React.FC = () => {
           <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
         </motion.div>
       </header>
-
-      {/* SECTION 'WORK' REMOVED HERE */}
 
       <section id="services" className="relative z-10 py-32 bg-white/5 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -272,7 +270,7 @@ const App: React.FC = () => {
                   <h4 className="font-bold text-lg">حقوق دارایی‌ها</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. BERUDED حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
+                  پس از پرداخت نهایی، مشتری حقوق کامل استفاده از محتوا و فایل‌ها رو می‌گیره. ASCEND حقوق روش‌های تولید (مثل فناوری AI) رو نگه می‌داره.
                 </p>
              </div>
            </div>
@@ -291,8 +289,8 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex flex-col gap-6 text-right">
-             <a href="mailto:hello@ascend.agency" className="text-xl md:text-2xl text-white hover:text-gray-400 transition-colors">hello@ascend.agency</a>
-             <div className="flex gap-8 justify-end items-center">
+             <a href="mailto:ascendvisuals@atomicmail.io" className="text-xl md:text-2xl text-white hover:text-gray-400 transition-colors">ascendvisuals@atomicmail.io</a>
+             <div className="flex flex-col md:flex-row gap-8 justify-end items-center">
                <a 
                  href="https://instagram.com/beruded" 
                  target="_blank" 
@@ -302,20 +300,17 @@ const App: React.FC = () => {
                >
                  Instagram
                </a>
-               <a 
-                 href="#" 
-                 className="text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline"
-                 data-hover="true"
+               
+               {/* دکمه مشاوره واتساپ */}
+               <button 
+                  onClick={() => openWhatsApp('سلام، نیاز به مشاوره دارم.')}
+                  className="flex items-center gap-2 text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline cursor-pointer"
+                  data-hover="true"
                >
-                 Twitter
-               </a>
-               <a 
-                 href="#" 
-                 className="text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline"
-                 data-hover="true"
-               >
-                 LinkedIn
-               </a>
+                 مشاوره واتساپ
+                 <ArrowUpRight className="w-4 h-4" />
+               </button>
+
              </div>
           </div>
         </div>
