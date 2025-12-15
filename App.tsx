@@ -3,70 +3,19 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CheckCircle2, ShieldCheck, RefreshCw, CreditCard } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
 // import AIChat from './components/AIChat'; 
-import { Project, ServicePackage } from './types';
+import { ServicePackage } from './types';
 
-// Data
-const PORTFOLIO: Project[] = [
-  { 
-    id: '1', 
-    title: 'Void Aesthetic', 
-    category: 'Editorial', 
-    video: '/images/publicimagesproject1_cover.jpg.mp4', // تغییر به ویدیو
-    description: 'High-contrast portraiture for the digital age.',
-    galleryImages: ['/images/project1_gal1.jpg', '/images/project1_gal2.jpg']
-  },
-  { 
-    id: '2', 
-    title: 'Chrome Hearts Vibe', 
-    category: 'Campaign', 
-    video: 'images/publicimagesproject2_cover.jpg.mp4',
-    description: 'Gothic futurism meets luxury streetwear.',
-    galleryImages: ['/images/project2_gal1.jpg', '/images/project2_gal2.jpg']
-  },
-  { 
-    id: '3', 
-    title: 'Liquid Silk', 
-    category: 'Motion', 
-    video: '/images/project3_cover.mp4',
-    description: 'Generative fluid simulations for fabric rendering.',
-    galleryImages: ['/images/project3_gal1.jpg', '/images/project3_gal2.jpg']
-  },
-  { 
-    id: '4', 
-    title: 'Neo-Tehran', 
-    category: 'Brand Identity', 
-    video: '/images/project4_cover.mp4',
-    description: 'Merging cultural heritage with cyberpunk aesthetics.',
-    galleryImages: ['/images/project4_gal1.jpeg', '/images/project4_gal2.jpeg']
-  },
-  { 
-    id: '5', 
-    title: 'Ethereal Models', 
-    category: 'AI Cast', 
-    video: '/images/project5_cover.mp4',
-    description: 'Perfectly imperfect digital humans.',
-    galleryImages: ['/images/project5_gal1.jpg', '/images/project5_gal2.jpg']
-  },
-  { 
-    id: '6', 
-    title: 'Glass Reality', 
-    category: 'Lookbook', 
-    video: '/images/project6_cover.mp4',
-    description: 'Refractive visuals for accessory launch.',
-    galleryImages: ['/images/project6_gal1.png', '/images/project6_gal2.png']
-  },
-];
-
+// Data - بدون پورتفولیو، فقط پکیج‌ها
 const PACKAGES: ServicePackage[] = [
   {
     title: 'پکیج پایه',
-    price: '۱۹,۸۰۰,۰۰۰ تومان (IRT)',
+    price: '۱۹,۸۰۰,۰۰۰ تومان',
     description: 'شروع قدرتمند برای حضور در شبکه‌های اجتماعی.',
     features: [
       '۱ ردیف کامل پست‌های گرید (۳ پست شبکه‌ای) – برای نمایش ساده محصولاتتون روی اینستاگرام',
@@ -79,7 +28,7 @@ const PACKAGES: ServicePackage[] = [
   },
   {
     title: 'پکیج استاندارد',
-    price: '۴۸,۰۰۰,۰۰۰ تومان (IRT)',
+    price: '۴۸,۰۰۰,۰۰۰ تومان',
     description: 'کمپین کامل برای تاثیرگذاری حداکثری.',
     isPopular: true,
     features: [
@@ -94,7 +43,7 @@ const PACKAGES: ServicePackage[] = [
   },
   {
     title: 'پکیج پیشرفته',
-    price: '۹۵,۰۰۰,۰۰۰ تومان (IRT)',
+    price: '۹۵,۰۰۰,۰۰۰ تومان',
     description: 'تحول کامل برند و استراتژی ویروسی.',
     features: [
       'کمپین کامل (بیش از ۱۵ دارایی) – مجموعه‌ای از تصاویر و ویدیوها برای پوشش کامل فصل یا محصول',
@@ -108,77 +57,9 @@ const PACKAGES: ServicePackage[] = [
   }
 ];
 
-// کامپوننت جدید برای مدیریت ویدیوها
-const ProjectCard = ({ project, onClick, index }: { project: Project; onClick: (p: Project) => void; index: number }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleMouseEnter = () => {
-    // در دسکتاپ با هاور پلی شود
-    if (window.innerWidth >= 768) {
-      videoRef.current?.play().catch(() => {});
-    }
-  };
-
-  const handleMouseLeave = () => {
-    // در دسکتاپ با رفتن موس متوقف شود
-    if (window.innerWidth >= 768) {
-      videoRef.current?.pause();
-      if (videoRef.current) videoRef.current.currentTime = 0; // برگرشت به اول
-    }
-  };
-
-  const handleViewportEnter = () => {
-    // در موبایل وقتی اسکرول شد و دیده شد پلی شود
-    if (window.innerWidth < 768) {
-      videoRef.current?.play().catch(() => {});
-    }
-  };
-
-  return (
-    <motion.div 
-      key={project.id}
-      onClick={() => onClick(project)}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      onViewportEnter={handleViewportEnter} // تشخیص ورود به صفحه برای موبایل
-      transition={{ delay: index * 0.1 }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className="group relative aspect-[3/4] overflow-hidden bg-[#050505] border border-white/5 cursor-pointer"
-      data-hover="true"
-    >
-      <video
-        ref={videoRef}
-        src={project.video}
-        muted
-        loop
-        playsInline
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" // کلاس grayscale حذف شد
-      />
-      
-      {/* Liquid Glass Overlay on Hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/80 via-transparent to-white/5 backdrop-blur-[2px]" />
-      
-      <div className="absolute bottom-0 left-0 w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.22, 1, 0.36, 1]">
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 p-4">
-          <div className="flex justify-between items-start">
-            <div>
-              <span className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-1 block">{project.category}</span>
-              <h3 className="text-2xl font-heading font-bold uppercase">{project.title}</h3>
-            </div>
-            <ArrowUpRight className="w-5 h-5 text-white" />
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
@@ -197,15 +78,12 @@ const App: React.FC = () => {
     window.open(url, '_blank');
   };
 
-  const closeModal = () => {
-    setSelectedProject(null);
-  };
-
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      {/* <AIChat /> */}
+      {/* <AIChat /> */} 
       
+      {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
         <div 
           className="text-3xl font-heading font-black tracking-widest text-white z-50 cursor-pointer text-center" 
@@ -215,8 +93,9 @@ const App: React.FC = () => {
           ASCEND
         </div>
         
+        {/* Desktop Links - "Work" removed */}
         <div className="absolute right-8 hidden md:flex gap-12 items-center">
-          {['Work', 'Services', 'Contact'].map((item) => (
+          {['Services', 'Contact'].map((item) => (
             <button 
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
@@ -237,6 +116,7 @@ const App: React.FC = () => {
         </button>
       </nav>
 
+      {/* Mobile Menu - "Work" removed */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -245,7 +125,7 @@ const App: React.FC = () => {
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
             className="fixed inset-0 z-40 bg-black/90 flex flex-col items-center justify-center gap-10"
           >
-            {['Work', 'Services', 'Contact'].map((item) => (
+            {['Services', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
@@ -273,7 +153,7 @@ const App: React.FC = () => {
           <LiquidText 
             text="ASCEND" 
             as="h1" 
-            className="text-[18vw] md:text-[12rem] leading-[1] md:leading-[1.1] tracking-tighter opacity-100"
+            className="text-[18vw] md:text-[12rem] leading-[1] md:leading-[1.1] tracking-tighter opacity-100 py-4"
           />
           
           <motion.p
@@ -296,33 +176,8 @@ const App: React.FC = () => {
         </motion.div>
       </header>
 
-      {/* WORK / GALLERY SECTION */}
-      <section id="work" className="relative z-10 py-32 px-4 md:px-8">
-        <div className="max-w-[1800px] mx-auto">
-          <div className="flex justify-between items-end mb-20 border-b border-white/10 pb-8">
-            <h2 className="text-6xl md:text-8xl font-heading font-bold uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800">
-              Select<br/>Work
-            </h2>
-            <div className="hidden md:block text-right text-gray-400 font-mono text-sm max-w-xs">
-              SHOWCASING THE FUTURE OF DIGITAL FASHION CAMPAIGNS.
-            </div>
-          </div>
+      {/* SECTION 'WORK' REMOVED HERE */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
-            {PORTFOLIO.map((project, idx) => (
-              // استفاده از کامپوننت جدید ProjectCard
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
-                index={idx} 
-                onClick={setSelectedProject} 
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES / PRICING SECTION */}
       <section id="services" className="relative z-10 py-32 bg-white/5 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
            <div className="text-center mb-24">
@@ -465,64 +320,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      {/* PROJECT GALLERY MODAL */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl overflow-y-auto"
-          >
-            <button
-              onClick={closeModal}
-              className="fixed top-8 right-8 text-white z-50 hover:rotate-90 transition-transform duration-300"
-            >
-              <X size={40} />
-            </button>
-
-            <div className="max-w-7xl mx-auto px-4 py-24 md:py-32">
-              <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="mb-12"
-              >
-                <span className="text-blue-400 font-mono text-sm uppercase tracking-widest mb-4 block">{selectedProject.category}</span>
-                <h2 className="text-5xl md:text-8xl font-heading font-bold uppercase mb-6">{selectedProject.title}</h2>
-                <p className="text-gray-300 text-lg md:text-xl max-w-2xl font-light">{selectedProject.description}</p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                {/* Main Cover - Updated to use VIDEO in Modal */}
-                <motion.div
-                   initial={{ y: 50, opacity: 0 }}
-                   animate={{ y: 0, opacity: 1 }}
-                   transition={{ delay: 0.3 }}
-                   className="md:col-span-2 aspect-video w-full overflow-hidden"
-                >
-                   {/* استفاده از ویدیو در مودال */}
-                  <video src={selectedProject.video} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                </motion.div>
-
-                {/* Gallery Images */}
-                {selectedProject.galleryImages.map((img, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.4 + (index * 0.1) }}
-                    className="aspect-[4/5] w-full overflow-hidden"
-                  >
-                    <img src={img} alt={`Gallery ${index + 1}`} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
