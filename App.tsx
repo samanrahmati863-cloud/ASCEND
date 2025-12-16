@@ -3,59 +3,129 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck, MessageCircle } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Aperture, Layers, Fingerprint, Gem, CreditCard, RefreshCw, ShieldCheck, Timer } from 'lucide-react';
 import LiquidText from './components/GlitchText';
 import CustomCursor from './components/CustomCursor';
-// import AIChat from './components/AIChat'; 
 import { ServicePackage } from './types';
 
-// Data - بدون پورتفولیو، فقط پکیج‌ها
+// Data - قیمت‌ها با ۲۰٪ تخفیف محاسبه شدند
 const PACKAGES: ServicePackage[] = [
   {
     title: 'پکیج پایه',
-    price: '۱۹,۸۰۰,۰۰۰ تومان',
+    originalPrice: '۱۹,۸۰۰,۰۰۰',
+    price: '۱۵,۸۴۰,۰۰۰ تومان', // ۲۰٪ تخفیف
     description: 'شروع قدرتمند برای حضور در شبکه‌های اجتماعی.',
     features: [
-      '۱ ردیف کامل پست‌های گرید (۳ پست شبکه‌ای) – برای نمایش ساده محصولاتتون روی اینستاگرام',
-      '۲ تصویر هیرو با کیفیت بالا – عکس‌های اصلی که برندتون رو برجسته می‌کنن',
-      '۱ ویدیو موشن (ریل) – انیمیشن کوتاه برای جذب مخاطب',
-      '۱ دور بازبینی – برای تنظیم نهایی'
+      '۱ ردیف کامل پست‌های گرید (۳ پست شبکه‌ای)',
+      '۲ تصویر هیرو با کیفیت بالا',
+      '۱ ویدیو موشن (ریل) برای جذب مخاطب',
+      '۱ دور بازبینی'
     ],
-    bonus: 'شامل ایجاد "سفیر برند" – یه مدل شخصی‌سازی‌شده برای پروفایل برند.',
-    whatsappMessage: 'سلام، آماده‌ام پکیج پایه رو رزرو کنم.'
+    bonus: 'شامل ایجاد "سفیر برند" – یه مدل شخصی‌سازی‌شده.',
+    whatsappMessage: 'سلام، می‌خوام از تخفیف پکیج پایه استفاده کنم.'
   },
   {
     title: 'پکیج استاندارد',
-    price: '۴۸,۰۰۰,۰۰۰ تومان',
+    originalPrice: '۴۸,۰۰۰,۰۰۰',
+    price: '۳۸,۴۰۰,۰۰۰ تومان', // ۲۰٪ تخفیف
     description: 'کمپین کامل برای تاثیرگذاری حداکثری.',
     isPopular: true,
     features: [
-      '۲ ردیف کامل پست‌های گرید (۶ پست شبکه‌ای) – برای کمپین کامل‌تر روی اینستاگرام',
-      '۴ تصویر ادیتوریال – عکس‌های حرفه‌ای با سبک مجله‌ای برای تبلیغ محصولات فشن یا جواهرات',
-      '۲ ریل سینمایی – ویدیوهای داستانی برای افزایش تعامل مخاطبان',
-      'کپشن‌های narrative (به فارسی و انگلیسی) – متن‌ها برای داستان برند ',
-      '۲ دور بازبینی – برای تنظیم خلاقانه‌تر'
+      '۲ ردیف کامل پست‌های گرید (۶ پست شبکه‌ای)',
+      '۴ تصویر ادیتوریال حرفه‌ای',
+      '۲ ریل سینمایی داستانی',
+      'کپشن‌های narrative (فارسی و انگلیسی)',
+      '۲ دور بازبینی'
     ],
-    bonus: 'شامل «تریپتیک هیجان» (تیزرهای استوری) – سه تصویر پیوسته و جذاب برای افزایش تعامل مخاطبان در استوری‌های اینستاگرام.',
-    whatsappMessage: 'سلام، می‌خوام پکیج استاندارد رو رزرو کنم.'
+    bonus: 'شامل «تریپتیک هیجان» (تیزرهای استوری).',
+    whatsappMessage: 'سلام، می‌خوام از تخفیف پکیج استاندارد استفاده کنم.'
   },
   {
     title: 'پکیج پیشرفته',
-    price: '۹۵,۰۰۰,۰۰۰ تومان',
+    originalPrice: '۹۵,۰۰۰,۰۰۰',
+    price: '۷۶,۰۰۰,۰۰۰ تومان', // ۲۰٪ تخفیف
     description: 'تحول کامل برند و استراتژی ویروسی.',
     features: [
-      'کمپین کامل (بیش از ۱۵ دارایی) – مجموعه‌ای از تصاویر و ویدیوها برای پوشش کامل فصل یا محصول',
-      '۱ فیلم برند سینمایی (4K) – ویدیو حرفه‌ای با کیفیت بالا برای وبسایت یا شبکه‌های اجتماعی',
-      'لوک‌بوک دیجیتال (لی‌اوت PDF) – کتابچه دیجیتال محصولات با طراحی حرفه‌ای',
-      'طراحی صدای حرفه‌ای – صداگذاری برای ویدیوها ',
-      '۳ دور بازبینی + دسترسی به مدیر خلاق – برای مشاوره مستقیم و تنظیم نهایی'
+      'کمپین کامل (بیش از ۱۵ دارایی)',
+      '۱ فیلم برند سینمایی (4K)',
+      'لوک‌بوک دیجیتال (لی‌اوت PDF)',
+      'طراحی صدای حرفه‌ای',
+      '۳ دور بازبینی + دسترسی به مدیر خلاق'
     ],
-    bonus: 'شامل "دک ویژن آینده" (مفاهیم فصل بعدی) – ایده‌های مفهومی برای کمپین‌های آینده.',
-    whatsappMessage: 'سلام، می‌خوام پکیج پیشرفته رو رزرو کنم.'
+    bonus: 'شامل "دک ویژن آینده" (مفاهیم فصل بعدی).',
+    whatsappMessage: 'سلام، می‌خوام از تخفیف پکیج پیشرفته استفاده کنم.'
   }
 ];
+
+// کامپوننت تایمر شمارش معکوس
+const CountdownTimer = () => {
+  // زمان پایان را ۷ روز از اولین بازدید تنظیم می‌کنیم
+  const calculateTimeLeft = () => {
+    const savedEndDate = localStorage.getItem('discountEndDate');
+    let targetDate;
+
+    if (savedEndDate) {
+      targetDate = new Date(parseInt(savedEndDate));
+    } else {
+      targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + 7); // ۷ روز اضافه کن
+      localStorage.setItem('discountEndDate', targetDate.getTime().toString());
+    }
+
+    const difference = +targetDate - +new Date();
+    
+    if (difference > 0) {
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
+  return (
+    <div className="flex flex-col items-center justify-center mb-16 px-4">
+      <div className="flex items-center gap-2 text-[#ff4d4d] mb-4 font-bold tracking-widest uppercase animate-pulse">
+        <Timer className="w-5 h-5" />
+        <span>پیشنهاد محدود ویژه</span>
+      </div>
+      <div className="flex gap-4 md:gap-8 text-center font-mono text-white bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-md">
+        <div className="flex flex-col">
+          <span className="text-3xl md:text-5xl font-bold">{timeLeft.days}</span>
+          <span className="text-xs text-gray-400 uppercase tracking-wider mt-2">روز</span>
+        </div>
+        <span className="text-3xl md:text-5xl font-light text-gray-600">:</span>
+        <div className="flex flex-col">
+          <span className="text-3xl md:text-5xl font-bold">{timeLeft.hours}</span>
+          <span className="text-xs text-gray-400 uppercase tracking-wider mt-2">ساعت</span>
+        </div>
+        <span className="text-3xl md:text-5xl font-light text-gray-600">:</span>
+        <div className="flex flex-col">
+          <span className="text-3xl md:text-5xl font-bold">{timeLeft.minutes}</span>
+          <span className="text-xs text-gray-400 uppercase tracking-wider mt-2">دقیقه</span>
+        </div>
+        <span className="text-3xl md:text-5xl font-light text-gray-600">:</span>
+        <div className="flex flex-col">
+          <span className="text-3xl md:text-5xl font-bold text-[#ff4d4d]">{timeLeft.seconds}</span>
+          <span className="text-xs text-gray-400 uppercase tracking-wider mt-2">ثانیه</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
@@ -81,7 +151,6 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-900 via-black to-black text-white selection:bg-white selection:text-black cursor-auto md:cursor-none overflow-x-hidden">
       <CustomCursor />
-      {/* <AIChat /> */} 
       
       {/* Navigation - Glassy Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-8 flex justify-center items-center mix-blend-difference">
@@ -178,10 +247,13 @@ const App: React.FC = () => {
 
       <section id="services" className="relative z-10 py-32 bg-white/5 backdrop-blur-3xl">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-           <div className="text-center mb-24">
+           <div className="text-center mb-12">
              <h2 className="text-5xl md:text-8xl font-heading font-bold mb-6">SERVICES</h2>
              <p className="text-gray-400 max-w-xl mx-auto uppercase tracking-widest text-sm">Elevate your brand aesthetic</p>
            </div>
+           
+           {/* اضافه شدن تایمر اینجا */}
+           <CountdownTimer />
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
              {PACKAGES.map((pkg, i) => (
@@ -191,9 +263,9 @@ const App: React.FC = () => {
                  whileInView={{ opacity: 1, y: 0 }}
                  viewport={{ once: true }}
                  transition={{ delay: i * 0.2 }}
-                 className={`relative flex flex-col justify-between group overflow-hidden font-persian ${pkg.isPopular ? 'border border-white/40 bg-white/5' : 'border border-white/10 bg-black/20'}`}
+                 className={`relative flex flex-col justify-between group overflow-hidden font-persian ${pkg.isPopular ? 'border border-red-500/50 bg-white/5' : 'border border-white/10 bg-black/20'}`}
                  style={{
-                   boxShadow: pkg.isPopular ? '0 0 50px rgba(255,255,255,0.05)' : 'none'
+                   boxShadow: pkg.isPopular ? '0 0 50px rgba(220, 38, 38, 0.1)' : 'none'
                  }}
                >
                  <div className="absolute top-0 left-0 w-full h-[200%] bg-gradient-to-b from-white/10 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 transform -skew-y-12 translate-y-[-50%]" />
@@ -203,11 +275,16 @@ const App: React.FC = () => {
                       {i === 0 && <Aperture className="w-8 h-8 text-gray-500" />}
                       {i === 1 && <Layers className="w-8 h-8 text-white" />}
                       {i === 2 && <Fingerprint className="w-8 h-8 text-gray-500" />}
-                      {pkg.isPopular && <span className="text-[10px] font-bold bg-white text-black px-2 py-1 uppercase tracking-widest font-heading">Most Popular</span>}
+                      {pkg.isPopular && <span className="text-[10px] font-bold bg-red-600 text-white px-2 py-1 uppercase tracking-widest font-heading">۲۰٪ تخفیف ویژه</span>}
                    </div>
                    
                    <h3 className="text-3xl font-bold mb-2">{pkg.title}</h3>
-                   <div className="text-4xl font-light text-blue-300 mb-8 tracking-tight">{pkg.price}</div>
+                   
+                   {/* بخش قیمت جدید */}
+                   <div className="flex flex-col gap-1 mb-8">
+                      <span className="text-lg text-gray-500 line-through decoration-red-500/50 decoration-2">{pkg.originalPrice}</span>
+                      <div className="text-4xl font-light text-[#ff4d4d] tracking-tight font-bold">{pkg.price}</div>
+                   </div>
                    
                    <ul className="space-y-4 mb-8">
                      {pkg.features.map((feature, fIdx) => (
@@ -232,11 +309,11 @@ const App: React.FC = () => {
                  <div className="p-8 md:p-12 pt-0">
                   <button 
                     onClick={() => openWhatsApp(pkg.whatsappMessage || '')}
-                    className="w-full py-4 border border-white/20 font-persian font-bold text-sm hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center gap-2"
+                    className="w-full py-4 border border-white/20 font-persian font-bold text-sm hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center justify-center gap-2 group"
                     data-hover="true"
                   >
-                    رزرو پکیج
-                    <ArrowUpRight className="w-4 h-4" />
+                    رزرو با تخفیف
+                    <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
                   </button>
                  </div>
                </motion.div>
