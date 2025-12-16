@@ -6,6 +6,7 @@
 export interface ServicePackage {
   title: string;
   price: string;
+  originalPrice?: string; // اضافه شد برای قیمت قبل از تخفیف
   description: string;
   features: string[];
   isPopular?: boolean;
