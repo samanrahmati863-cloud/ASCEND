@@ -252,7 +252,7 @@ const App: React.FC = () => {
              <p className="text-gray-400 max-w-xl mx-auto uppercase tracking-widest text-sm">Elevate your brand aesthetic</p>
            </div>
            
-           {/* اضافه شدن تایمر اینجا */}
+           {/* تایمر شمارش معکوس */}
            <CountdownTimer />
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
@@ -368,8 +368,10 @@ const App: React.FC = () => {
           <div className="flex flex-col gap-6 text-right">
              <a href="mailto:ascendvisuals@atomicmail.io" className="text-xl md:text-2xl text-white hover:text-gray-400 transition-colors">ascendvisuals@atomicmail.io</a>
              <div className="flex flex-col md:flex-row gap-8 justify-end items-center">
+               
+               {/* لینک جدید اینستاگرام */}
                <a 
-                 href="https://instagram.com/beruded" 
+                 href="https://www.instagram.com/ascend.laab" 
                  target="_blank" 
                  rel="noopener noreferrer" 
                  className="text-sm uppercase tracking-widest hover:text-white text-gray-400 transition-colors hover:underline"
